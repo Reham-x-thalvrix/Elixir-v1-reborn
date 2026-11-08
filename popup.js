@@ -7,9 +7,20 @@ try {
       Object.assign(h, result.elixir_settings);
     }
     initUI();
+    logMessage("System initialized successfully.");
   });
 } catch (e) {
   initUI();
+  logMessage("Initialized in fallback mode.");
+}
+
+function logMessage(text) {
+  const logContainer = document.getElementById("elixir-log-content");
+  if (logContainer) {
+    const time = new Date().toLocaleTimeString();
+    logContainer.innerHTML += `<div>[${time}] ${text}</div>`;
+    logContainer.scrollTop = logContainer.scrollHeight;
+  }
 }
 
 function saveAndSync() {
@@ -47,6 +58,7 @@ function initUI() {
       p = r;
       e.querySelectorAll(".elixir-tab").forEach((O, E) => O.classList.toggle("on", E === r));
       renderBody();
+      logMessage(`Switched tab to: ${item.title}`);
     };
     e.appendChild(y);
   });
@@ -57,6 +69,7 @@ function initUI() {
       h.preamp = 1; h.opus = 1.2; h.bitrate = 510; h.exciter = 0; h.stereo = false; h.wider = false; h.haas = false;
       saveAndSync();
       renderBody();
+      logMessage("Settings reset to default.");
     };
   }
 
@@ -74,7 +87,23 @@ function renderBody() {
     n.appendChild(r.type === "toggle" ? v(r) : M(r));
   });
 
-  // যদি মনিটর বা মিটার ট্যাব (STEREO LOG) হয়, তবে রেডার ও মিটার যোগ করা হবে
+  // [121 SET] ট্যাবের নিচে কনসোল যোগ করা হলো
+  if (p === 0) {
+    const consoleBox = document.createElement("div");
+    consoleBox.className = "elixir-console";
+    consoleBox.innerHTML = `
+      <div class="elixir-console-header">
+        <span>CONSOLE LOGS</span>
+        <span>STATUS: ACTIVE</span>
+      </div>
+      <div id="elixir-log-content" class="elixir-console-logs">
+        <div>[System] Elixir V1 ready.</div>
+      </div>
+    `;
+    n.appendChild(consoleBox);
+  }
+
+  // STEREO LOG ট্যাবের জন্য মনিটর মিটার
   if (i.monitor) {
     const r = document.createElement("div");
     r.className = "elixir-monitor";
@@ -91,9 +120,7 @@ function renderBody() {
           <span class="elixir-corner bl"></span><span class="elixir-corner br"></span>
           <span class="elixir-lbl lf">L</span><span class="elixir-lbl rt">R</span>
           <span class="elixir-lbl tp">FRONT</span><span class="elixir-lbl bt">BACK</span>
-          <div class="elixir-trail"></div><div class="elixir-trail"></div><div class="elixir-trail"></div>
-          <div class="elixir-trail"></div><div class="elixir-trail"></div>
-          <div class="elixir-head-dot on"></div>
+          <div class="elixir-head-dot"></div>
         </div>
         <div class="elixir-meters">
           <div class="elixir-meter"><span>L</span><i><b id="elixir-mL" style="width: 35%;"></b></i></div>
@@ -121,6 +148,7 @@ function M(i) {
     O.textContent = i.fmt(h[i.key]);
     E();
     saveAndSync();
+    logMessage(`${i.name} set to ${h[i.key]}`);
   });
   return r;
 }
@@ -140,6 +168,7 @@ function v(i) {
     y.classList.toggle("on", h[i.key]);
     y.setAttribute("aria-checked", h[i.key]);
     saveAndSync();
+    logMessage(`${i.name} toggled: ${h[i.key] ? 'ON' : 'OFF'}`);
   };
   return r;
 }
