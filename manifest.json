@@ -3,10 +3,12 @@
   "name": "Elixir V1",
   "version": "2.0.0",
   "description": "made by Thalvrix",
+  "action": {
+    "default_popup": "popup.html"
+  },
   "content_scripts": [
     {
       "matches": ["*://discord.com/*", "*://*.discord.com/*"],
-      "css": ["style.css"],
       "js": ["loader.js"],
       "run_at": "document_start",
       "all_frames": true
