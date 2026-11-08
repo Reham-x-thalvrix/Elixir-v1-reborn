@@ -1,5 +1,5 @@
 const h = { preamp: 1, opus: 1.2, bitrate: 510, exciter: 0, stereo: false, wider: false, haas: false };
-let p = 0; // p কে গ্লোবালি ডিফাইন করা হলো যাতে সব ফাংশন থেকে কাজ করে
+let p = 0; 
 
 try {
   chrome.storage.local.get(['elixir_settings'], (result) => {
@@ -73,6 +73,34 @@ function renderBody() {
   i.controls.forEach(r => {
     n.appendChild(r.type === "toggle" ? v(r) : M(r));
   });
+
+  // যদি মনিটর বা মিটার ট্যাব (STEREO LOG) হয়, তবে রেডার ও মিটার যোগ করা হবে
+  if (i.monitor) {
+    const r = document.createElement("div");
+    r.className = "elixir-monitor";
+    r.innerHTML = `
+        <div class="elixir-line"><span class="elixir-name">VOICE POSITION</span><span class="elixir-val" id="elixir-pos">IDLE</span></div>
+        <div class="elixir-reticle">
+          <div class="elixir-grid"></div>
+          <div class="elixir-ring r3"></div>
+          <div class="elixir-ring r2"></div>
+          <div class="elixir-ring r1"></div>
+          <div class="elixir-sweep"></div>
+          <div class="elixir-crosshair"></div>
+          <span class="elixir-corner tl"></span><span class="elixir-corner tr"></span>
+          <span class="elixir-corner bl"></span><span class="elixir-corner br"></span>
+          <span class="elixir-lbl lf">L</span><span class="elixir-lbl rt">R</span>
+          <span class="elixir-lbl tp">FRONT</span><span class="elixir-lbl bt">BACK</span>
+          <div class="elixir-trail"></div><div class="elixir-trail"></div><div class="elixir-trail"></div>
+          <div class="elixir-trail"></div><div class="elixir-trail"></div>
+          <div class="elixir-head-dot on"></div>
+        </div>
+        <div class="elixir-meters">
+          <div class="elixir-meter"><span>L</span><i><b id="elixir-mL" style="width: 35%;"></b></i></div>
+          <div class="elixir-meter"><span>R</span><i><b id="elixir-mR" style="width: 35%;"></b></i></div>
+        </div>`;
+    n.appendChild(r);
+  }
 }
 
 function M(i) {
