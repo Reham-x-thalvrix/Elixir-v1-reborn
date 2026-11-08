@@ -1,0 +1,98 @@
+const h = { preamp: 1, opus: 1.2, bitrate: 510, exciter: 0, stereo: false, wider: false, haas: false };
+
+chrome.storage.local.get(['elixir_settings'], (result) => {
+  if (result.elixir_settings) {
+    Object.assign(h, result.elixir_settings);
+  }
+  initUI();
+});
+
+function saveAndSync() {
+  chrome.storage.local.set({ elixir_settings: h });
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    if (tabs[0]?.id) {
+      chrome.tabs.sendMessage(tabs[0].id, { type: 'UPDATE_SETTINGS', settings: h }).catch(() => {});
+    }
+  });
+}
+
+const ae = [
+  {title:"121 SET",controls:[{type:"slider",key:"preamp",name:"PREAMP",min:1,max:500,step:.1,fmt:t=>`${Number(t).toFixed(1)}x`},{type:"slider",key:"opus",name:"GAIN",min:1,max:5e4,step:.1,fmt:t=>`${Number(t).toFixed(1)}×`},{type:"slider",key:"bitrate",name:"BITRATE",min:0,max:510,step:1,fmt:t=>`${t} kbps`},{type:"slider",key:"exciter",name:"EXCITER",min:0,max:500,step:1,fmt:t=>`${Math.round(t)}%`}]},
+  {title:"STEREO LOG",controls:[{type:"toggle",key:"stereo",name:"STEREO",sub:"IN-HEAD"},{type:"toggle",key:"wider",name:"WIDER"},{type:"toggle",key:"haas",name:"QUICK HAAS"}],monitor:!0}
+];
+
+function initUI() {
+  let p = 0;
+  const e = document.querySelector(".elixir-tabs"),
+        n = document.querySelector(".elixir-body");
+  
+  ae.forEach((item, r) => {
+    const y = document.createElement("button");
+    y.className = "elixir-tab" + (r === 0 ? " on" : "");
+    y.textContent = item.title;
+    y.onclick = () => {
+      p = r;
+      e.querySelectorAll(".elixir-tab").forEach((O, E) => O.classList.toggle("on", E === r));
+      renderBody();
+    };
+    e.appendChild(y);
+  });
+
+  document.querySelector(".elixir-reset").onclick = () => {
+    h.preamp = 1; h.opus = 1.2; h.bitrate = 510; h.exciter = 0; h.stereo = false; h.wider = false; h.haas = false;
+    saveAndSync();
+    renderBody();
+  };
+
+  renderBody();
+}
+
+function renderBody() {
+  const n = document.querySelector(".elixir-body");
+  n.innerHTML = "";
+  const i = ae[p];
+  i.controls.forEach(r => {
+    n.appendChild(r.type === "toggle" ? v(r) : M(r));
+  });
+}
+
+function M(i) {
+  const r = document.createElement("div");
+  r.className = "elixir-row";
+  r.innerHTML = `
+      <div class="elixir-line">
+        <span class="elixir-name">${i.name}</span>
+        <span class="elixir-val">${i.fmt(h[i.key])}</span>
+      </div>
+      <input type="range" min="${i.min}" max="${i.max}" step="${i.step}" value="${h[i.key]}" />`;
+  const y = r.querySelector("input"),
+        O = r.querySelector(".elixir-val"),
+        E = () => y.style.setProperty("--p", (y.value - i.min) / (i.max - i.min) * 100 + "%");
+  E();
+  y.addEventListener("input", () => {
+    h[i.key] = Number(y.value);
+    O.textContent = i.fmt(h[i.key]);
+    E();
+    saveAndSync();
+  });
+  return r;
+}
+
+function v(i) {
+  const r = document.createElement("div");
+  r.className = "elixir-row elixir-toggle-row";
+  r.innerHTML = `
+      <span class="elixir-tname"><span class="elixir-name">${i.name}</span><span class="elixir-subname">${i.sub||""}</span></span>
+      <button type="button" class="elixir-switch" role="switch" aria-checked="${h[i.key]}">
+        <span class="elixir-knob"></span>
+      </button>`;
+  const y = r.querySelector(".elixir-switch");
+  y.classList.toggle("on", !!h[i.key]);
+  y.onclick = () => {
+    h[i.key] = !h[i.key];
+    y.classList.toggle("on", h[i.key]);
+    y.setAttribute("aria-checked", h[i.key]);
+    saveAndSync();
+  };
+  return r;
+}
