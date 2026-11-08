@@ -1,19 +1,25 @@
 const h = { preamp: 1, opus: 1.2, bitrate: 510, exciter: 0, stereo: false, wider: false, haas: false };
 
-chrome.storage.local.get(['elixir_settings'], (result) => {
-  if (result.elixir_settings) {
-    Object.assign(h, result.elixir_settings);
-  }
+try {
+  chrome.storage.local.get(['elixir_settings'], (result) => {
+    if (result && result.elixir_settings) {
+      Object.assign(h, result.elixir_settings);
+    }
+    initUI();
+  });
+} catch (e) {
   initUI();
-});
+}
 
 function saveAndSync() {
-  chrome.storage.local.set({ elixir_settings: h });
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    if (tabs[0]?.id) {
-      chrome.tabs.sendMessage(tabs[0].id, { type: 'UPDATE_SETTINGS', settings: h }).catch(() => {});
-    }
-  });
+  try {
+    chrome.storage.local.set({ elixir_settings: h });
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (tabs[0]?.id) {
+        chrome.tabs.sendMessage(tabs[0].id, { type: 'UPDATE_SETTINGS', settings: h }).catch(() => {});
+      }
+    });
+  } catch (e) {}
 }
 
 const ae = [
@@ -26,6 +32,8 @@ function initUI() {
   const e = document.querySelector(".elixir-tabs"),
         n = document.querySelector(".elixir-body");
   
+  if (!e || !n) return;
+
   ae.forEach((item, r) => {
     const y = document.createElement("button");
     y.className = "elixir-tab" + (r === 0 ? " on" : "");
@@ -38,19 +46,25 @@ function initUI() {
     e.appendChild(y);
   });
 
-  document.querySelector(".elixir-reset").onclick = () => {
-    h.preamp = 1; h.opus = 1.2; h.bitrate = 510; h.exciter = 0; h.stereo = false; h.wider = false; h.haas = false;
-    saveAndSync();
-    renderBody();
-  };
+  const resetBtn = document.querySelector(".elixir-reset");
+  if (resetBtn) {
+    resetBtn.onclick = () => {
+      h.preamp = 1; h.opus = 1.2; h.bitrate = 510; h.exciter = 0; h.stereo = false; h.wider = false; h.haas = false;
+      saveAndSync();
+      renderBody();
+    };
+  }
 
   renderBody();
 }
 
 function renderBody() {
   const n = document.querySelector(".elixir-body");
+  if (!n) return;
   n.innerHTML = "";
   const i = ae[p];
+  if (!i || !i.controls) return;
+  
   i.controls.forEach(r => {
     n.appendChild(r.type === "toggle" ? v(r) : M(r));
   });
@@ -62,12 +76,12 @@ function M(i) {
   r.innerHTML = `
       <div class="elixir-line">
         <span class="elixir-name">${i.name}</span>
-        <span class="elixir-val">${i.fmt(h[i.key])}</span>
+        <span class="elixir-val">${i.fmt(h[i.key] !== undefined ? h[i.key] : i.min)}</span>
       </div>
-      <input type="range" min="${i.min}" max="${i.max}" step="${i.step}" value="${h[i.key]}" />`;
+      <input type="range" min="${i.min}" max="${i.max}" step="${i.step}" value="${h[i.key] !== undefined ? h[i.key] : i.min}" />`;
   const y = r.querySelector("input"),
         O = r.querySelector(".elixir-val"),
-        E = () => y.style.setProperty("--p", (y.value - i.min) / (i.max - i.min) * 100 + "%");
+        E = () => y.style.setProperty("--p", ((y.value - i.min) / (i.max - i.min)) * 100 + "%");
   E();
   y.addEventListener("input", () => {
     h[i.key] = Number(y.value);
@@ -83,7 +97,7 @@ function v(i) {
   r.className = "elixir-row elixir-toggle-row";
   r.innerHTML = `
       <span class="elixir-tname"><span class="elixir-name">${i.name}</span><span class="elixir-subname">${i.sub||""}</span></span>
-      <button type="button" class="elixir-switch" role="switch" aria-checked="${h[i.key]}">
+      <button type="button" class="elixir-switch" role="switch" aria-checked="${!!h[i.key]}">
         <span class="elixir-knob"></span>
       </button>`;
   const y = r.querySelector(".elixir-switch");
