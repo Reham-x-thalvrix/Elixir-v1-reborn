@@ -1,4 +1,5 @@
 const h = { preamp: 1, opus: 1.2, bitrate: 510, exciter: 0, stereo: false, wider: false, haas: false };
+let p = 0; // p কে গ্লোবালি ডিফাইন করা হলো যাতে সব ফাংশন থেকে কাজ করে
 
 try {
   chrome.storage.local.get(['elixir_settings'], (result) => {
@@ -27,16 +28,20 @@ const ae = [
   {title:"STEREO LOG",controls:[{type:"toggle",key:"stereo",name:"STEREO",sub:"IN-HEAD"},{type:"toggle",key:"wider",name:"WIDER"},{type:"toggle",key:"haas",name:"QUICK HAAS"}],monitor:!0}
 ];
 
+document.addEventListener("DOMContentLoaded", () => {
+  initUI();
+});
+
 function initUI() {
-  let p = 0;
   const e = document.querySelector(".elixir-tabs"),
         n = document.querySelector(".elixir-body");
   
   if (!e || !n) return;
 
+  e.innerHTML = "";
   ae.forEach((item, r) => {
     const y = document.createElement("button");
-    y.className = "elixir-tab" + (r === 0 ? " on" : "");
+    y.className = "elixir-tab" + (r === p ? " on" : "");
     y.textContent = item.title;
     y.onclick = () => {
       p = r;
