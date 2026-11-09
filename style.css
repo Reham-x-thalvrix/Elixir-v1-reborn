@@ -1,9 +1,9 @@
 :root {
   --elixir-bg: #030712;
-  --elixir-card: rgba(15, 23, 42, 0.75);
+  --elixir-card: rgba(15, 23, 42, 0.85);
   --elixir-accent: #38bdf8;
-  --elixir-accent-glow: rgba(56, 189, 248, 0.35);
-  --elixir-border: rgba(56, 189, 248, 0.18);
+  --elixir-accent-glow: rgba(56, 189, 248, 0.4);
+  --elixir-border: rgba(56, 189, 248, 0.2);
   --elixir-text: #f8fafc;
   --elixir-muted: #94a3b8;
 }
@@ -24,15 +24,14 @@ body {
   background: var(--elixir-bg) url("bg.gif") center center / cover no-repeat !important;
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
 }
 
 #elixir-panel::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(3, 7, 18, 0.92), rgba(15, 23, 42, 0.88));
-  backdrop-filter: blur(8px);
+  background: linear-gradient(135deg, rgba(3, 7, 18, 0.94), rgba(15, 23, 42, 0.9));
+  backdrop-filter: blur(10px);
   z-index: 1;
   pointer-events: none;
 }
@@ -59,7 +58,7 @@ body {
   letter-spacing: 8px;
   text-transform: uppercase;
   white-space: nowrap;
-  color: rgba(56, 189, 248, 0.025);
+  color: rgba(56, 189, 248, 0.02);
   transform: rotate(-15deg) scale(1.2);
 }
 
@@ -76,54 +75,54 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   border-bottom: 1px solid var(--elixir-border);
   padding-bottom: 10px;
 }
 
 .elixir-title {
-  font-size: 17px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  background: linear-gradient(135deg, #ffffff 40%, var(--elixir-accent) 100%);
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 2.5px;
+  background: linear-gradient(135deg, #ffffff 30%, var(--elixir-accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 12px var(--elixir-accent-glow));
+  filter: drop-shadow(0 0 10px var(--elixir-accent-glow));
 }
 
 .elixir-sub {
-  margin-top: 2px;
+  margin-top: 3px;
   font-size: 9.5px;
   color: var(--elixir-muted);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
 }
 
 .elixir-status {
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 20px;
   font-size: 8px;
   font-weight: 800;
   letter-spacing: 1.5px;
   color: #38bdf8;
   border: 1px solid rgba(56, 189, 248, 0.4);
-  background: rgba(56, 189, 248, 0.1);
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+  background: rgba(56, 189, 248, 0.12);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
 }
 
 .elixir-tabs {
   display: flex;
   gap: 8px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .elixir-tab {
   flex: 1;
-  padding: 9px 0;
-  border-radius: 8px;
+  padding: 10px 0;
+  border-radius: 9px;
   border: 1px solid var(--elixir-border);
-  background: rgba(30, 41, 59, 0.5);
+  background: rgba(30, 41, 59, 0.4);
   color: var(--elixir-muted);
-  font: 700 10px/1 sans-serif;
+  font: 700 10.5px/1 sans-serif;
   letter-spacing: 1.5px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -137,12 +136,12 @@ body {
 .elixir-tab.on {
   color: #fff;
   border-color: var(--elixir-accent);
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(15, 23, 42, 0.8));
-  box-shadow: 0 0 15px var(--elixir-accent-glow);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.28), rgba(15, 23, 42, 0.9));
+  box-shadow: 0 0 16px var(--elixir-accent-glow);
 }
 
 .elixir-body {
-  max-height: 360px;
+  max-height: 370px;
   overflow-y: auto;
   padding-right: 4px;
   scrollbar-width: thin;
@@ -159,16 +158,16 @@ body {
 
 .elixir-row {
   margin-bottom: 10px;
-  padding: 11px 14px;
-  border-radius: 10px;
+  padding: 12px 14px;
+  border-radius: 11px;
   background: var(--elixir-card);
   border: 1px solid var(--elixir-border);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: border-color 0.2s, transform 0.1s;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.2s;
 }
 
 .elixir-row:hover {
-  border-color: rgba(56, 189, 248, 0.35);
+  border-color: rgba(56, 189, 248, 0.4);
 }
 
 .elixir-line {
@@ -223,9 +222,9 @@ input[type="range"]::-webkit-slider-thumb:hover {
   margin-top: 10px;
   padding: 10px 12px;
   border-radius: 10px;
-  background: rgba(2, 6, 23, 0.9);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  box-shadow: inset 0 0 15px rgba(2, 6, 23, 0.8);
+  background: rgba(2, 6, 23, 0.95);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: inset 0 0 15px rgba(2, 6, 23, 0.9);
 }
 
 .elixir-console-header {
@@ -234,7 +233,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   letter-spacing: 1.5px;
   color: var(--elixir-accent);
   margin-bottom: 6px;
-  border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.2);
   padding-bottom: 4px;
   display: flex;
   justify-content: space-between;
@@ -305,7 +304,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   margin-top: 10px;
   padding: 12px;
   border: 1px solid var(--elixir-border);
-  border-radius: 10px;
+  border-radius: 11px;
   background: var(--elixir-card);
 }
 
@@ -314,17 +313,17 @@ input[type="range"]::-webkit-slider-thumb:hover {
   width: 100%;
   aspect-ratio: 1 / 1;
   margin-top: 10px;
-  border-radius: 8px;
+  border-radius: 9px;
   overflow: hidden;
-  background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.1), rgba(2, 6, 23, 0.95) 75%), #020617;
+  background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.12), rgba(2, 6, 23, 0.95) 75%), #020617;
   border: 1px solid var(--elixir-border);
 }
 
 .elixir-grid {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
   background-size: 20% 20%;
 }
 
@@ -348,7 +347,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   top: 10%;
   bottom: 10%;
   width: 1px;
-  background: rgba(56, 189, 248, 0.12);
+  background: rgba(56, 189, 248, 0.15);
 }
 .elixir-crosshair::after {
   content: "";
@@ -357,7 +356,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   left: 10%;
   right: 10%;
   height: 1px;
-  background: rgba(56, 189, 248, 0.12);
+  background: rgba(56, 189, 248, 0.15);
 }
 
 .elixir-corner {
@@ -367,7 +366,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   border-color: var(--elixir-accent);
   border-style: solid;
   border-width: 2px;
-  opacity: 0.5;
+  opacity: 0.6;
 }
 .elixir-corner.tl { top: 6px; left: 6px; border-right: 0; border-bottom: 0; }
 .elixir-corner.tr { top: 6px; right: 6px; border-left: 0; border-bottom: 0; }
@@ -437,12 +436,12 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 .elixir-reset {
   width: 100%;
-  padding: 10px 0;
+  padding: 11px 0;
   border-radius: 10px;
   cursor: pointer;
   border: 1px solid rgba(56, 189, 248, 0.4);
   color: #fff;
-  font: 800 10.5px/1 sans-serif;
+  font: 800 11px/1 sans-serif;
   letter-spacing: 2px;
   background: linear-gradient(135deg, #0284c7, #0f172a) !important;
   box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
