@@ -87,7 +87,7 @@ function renderBody() {
     n.appendChild(r.type === "toggle" ? v(r) : M(r));
   });
 
-  // [121 SET] ট্যাবের নিচে কনসোল যোগ করা হলো
+  // কনসোল বক্স [121 SET] ট্যাবের নিচে যুক্ত করা হলো
   if (p === 0) {
     const consoleBox = document.createElement("div");
     consoleBox.className = "elixir-console";
