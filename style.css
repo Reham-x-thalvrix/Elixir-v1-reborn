@@ -163,11 +163,6 @@ body {
   background: var(--elixir-card);
   border: 1px solid var(--elixir-border);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  transition: border-color 0.2s;
-}
-
-.elixir-row:hover {
-  border-color: rgba(56, 189, 248, 0.4);
 }
 
 .elixir-line {
@@ -210,43 +205,68 @@ input[type="range"]::-webkit-slider-thumb {
   background: #ffffff;
   border: 2px solid var(--elixir-accent);
   box-shadow: 0 0 10px var(--elixir-accent);
-  transition: transform 0.15s;
 }
 
-input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.25);
-}
-
-/* Console Box Styling */
+/* ========================================== */
+/* NEW UNIQUE TERMINAL CONSOLE BOARD DESIGN   */
+/* ========================================== */
 .elixir-console {
-  margin-top: 10px;
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: rgba(2, 6, 23, 0.95);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  box-shadow: inset 0 0 15px rgba(2, 6, 23, 0.9);
+  margin-top: 12px;
+  border-radius: 12px;
+  background: #010409;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), inset 0 0 12px rgba(56, 189, 248, 0.08);
+  overflow: hidden;
 }
 
-.elixir-console-header {
-  font-size: 8.5px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  color: var(--elixir-accent);
-  margin-bottom: 6px;
-  border-bottom: 1px solid rgba(56, 189, 248, 0.2);
-  padding-bottom: 4px;
+.elixir-console-topbar {
+  background: rgba(15, 23, 42, 0.9);
+  padding: 8px 12px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+.elixir-console-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.elixir-console-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.elixir-console-dot.red { background: #ef4444; }
+.elixir-console-dot.yellow { background: #f59e0b; }
+.elixir-console-dot.green { background: #10b981; box-shadow: 0 0 6px #10b981; }
+
+.elixir-console-title {
+  font-size: 8.5px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #38bdf8;
 }
 
 .elixir-console-logs {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 9px;
-  color: #cbd5e1;
-  max-height: 75px;
+  font-size: 9.5px;
+  color: #34d399; /* টার্মিনাল গ্রিন টেক্সট */
+  padding: 10px 12px;
+  max-height: 85px;
   overflow-y: auto;
-  line-height: 1.4;
+  line-height: 1.5;
   word-break: break-all;
+  scrollbar-width: thin;
+  scrollbar-color: #0284c7 transparent;
+}
+
+.elixir-console-logs::-webkit-scrollbar {
+  width: 3px;
+}
+.elixir-console-logs::-webkit-scrollbar-thumb {
+  background: #0284c7;
 }
 
 .elixir-toggle-row {
