@@ -1,36 +1,38 @@
 :root {
-  --elixir-accent: #0066ff;
-  --elixir-accent-2: #00d2ff;
-  --elixir-accent-deep: #002266;
-  --elixir-accent-soft: rgba(0, 102, 255, 0.4);
-  --elixir-accent-glow: rgba(0, 102, 255, 0.5);
-  --elixir-line: rgba(0, 102, 255, 0.25);
+  --elixir-bg: #030712;
+  --elixir-card: rgba(15, 23, 42, 0.75);
+  --elixir-accent: #38bdf8;
+  --elixir-accent-glow: rgba(56, 189, 248, 0.35);
+  --elixir-border: rgba(56, 189, 248, 0.18);
+  --elixir-text: #f8fafc;
+  --elixir-muted: #94a3b8;
 }
 
 body {
-  width: 420px;
+  width: 430px;
   margin: 0;
   padding: 0;
-  background: #030712;
-  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-  color: #fff;
+  background: var(--elixir-bg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--elixir-text);
   user-select: none;
 }
 
 #elixir-panel {
   width: 100%;
   box-sizing: border-box;
-  background: #030712 url("bg.gif") center center / cover no-repeat !important;
+  background: var(--elixir-bg) url("bg.gif") center center / cover no-repeat !important;
   position: relative;
   overflow: hidden;
+  border-radius: 12px;
 }
 
 #elixir-panel::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(3, 7, 18, 0.85);
-  backdrop-filter: blur(4px);
+  background: linear-gradient(135deg, rgba(3, 7, 18, 0.92), rgba(15, 23, 42, 0.88));
+  backdrop-filter: blur(8px);
   z-index: 1;
   pointer-events: none;
 }
@@ -53,18 +55,18 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  font: 900 46px/1 sans-serif;
-  letter-spacing: 6px;
+  font: 900 50px/1 sans-serif;
+  letter-spacing: 8px;
   text-transform: uppercase;
   white-space: nowrap;
-  color: rgba(0, 210, 255, 0.03);
-  transform: rotate(-18deg) scale(1.1);
+  color: rgba(56, 189, 248, 0.025);
+  transform: rotate(-15deg) scale(1.2);
 }
 
 .elixir-inner {
   position: relative;
   z-index: 3;
-  padding: 18px 20px 16px;
+  padding: 16px 18px;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -74,99 +76,99 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 14px;
-  border-bottom: 1px solid var(--elixir-line);
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--elixir-border);
   padding-bottom: 10px;
 }
 
 .elixir-title {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 800;
-  letter-spacing: 2.5px;
-  background: linear-gradient(135deg, #fff 30%, #00d2ff 100%);
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #ffffff 40%, var(--elixir-accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 10px rgba(0, 102, 255, 0.5));
+  filter: drop-shadow(0 0 12px var(--elixir-accent-glow));
 }
 
 .elixir-sub {
   margin-top: 2px;
-  font-size: 10px;
-  color: #888;
-  letter-spacing: 0.8px;
+  font-size: 9.5px;
+  color: var(--elixir-muted);
+  letter-spacing: 0.5px;
 }
 
 .elixir-status {
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-size: 8.5px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  color: #00d2ff;
-  border: 1px solid rgba(0, 210, 255, 0.3);
-  background: rgba(0, 210, 255, 0.08);
-  box-shadow: 0 0 10px rgba(0, 210, 255, 0.15);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  background: rgba(56, 189, 248, 0.1);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
 }
 
 .elixir-tabs {
   display: flex;
   gap: 8px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .elixir-tab {
   flex: 1;
-  padding: 8px 0;
+  padding: 9px 0;
   border-radius: 8px;
-  border: 1px solid rgba(0, 102, 255, 0.2);
-  background: rgba(10, 15, 30, 0.8);
-  color: #aaa;
-  font: 700 10.5px/1 sans-serif;
-  letter-spacing: 1.2px;
+  border: 1px solid var(--elixir-border);
+  background: rgba(30, 41, 59, 0.5);
+  color: var(--elixir-muted);
+  font: 700 10px/1 sans-serif;
+  letter-spacing: 1.5px;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
 }
 
 .elixir-tab:hover {
-  color: #fff;
-  border-color: rgba(0, 102, 255, 0.5);
+  color: var(--elixir-text);
+  border-color: rgba(56, 189, 248, 0.4);
 }
 
 .elixir-tab.on {
   color: #fff;
-  border-color: #00d2ff;
-  background: linear-gradient(135deg, rgba(0, 102, 255, 0.4), rgba(0, 34, 102, 0.6));
-  box-shadow: 0 0 14px var(--elixir-accent-glow);
+  border-color: var(--elixir-accent);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(15, 23, 42, 0.8));
+  box-shadow: 0 0 15px var(--elixir-accent-glow);
 }
 
 .elixir-body {
-  max-height: 380px;
+  max-height: 360px;
   overflow-y: auto;
   padding-right: 4px;
   scrollbar-width: thin;
-  scrollbar-color: var(--elixir-accent-deep) transparent;
+  scrollbar-color: #0284c7 transparent;
 }
 
 .elixir-body::-webkit-scrollbar {
   width: 4px;
 }
-
 .elixir-body::-webkit-scrollbar-thumb {
-  background: var(--elixir-accent-deep);
+  background: #0284c7;
   border-radius: 4px;
 }
 
 .elixir-row {
   margin-bottom: 10px;
-  padding: 10px 12px;
+  padding: 11px 14px;
   border-radius: 10px;
-  background: rgba(10, 15, 30, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  transition: border-color 0.2s;
+  background: var(--elixir-card);
+  border: 1px solid var(--elixir-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: border-color 0.2s, transform 0.1s;
 }
 
 .elixir-row:hover {
-  border-color: rgba(0, 102, 255, 0.3);
+  border-color: rgba(56, 189, 248, 0.35);
 }
 
 .elixir-line {
@@ -178,15 +180,15 @@ body {
 
 .elixir-name {
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 1.2px;
-  color: #00d2ff;
+  color: var(--elixir-accent);
 }
 
 .elixir-val {
   font-size: 11px;
   font-weight: 700;
-  color: #fff;
+  color: var(--elixir-text);
   font-variant-numeric: tabular-nums;
 }
 
@@ -194,55 +196,55 @@ input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 4px;
-  border-radius: 4px;
+  height: 5px;
+  border-radius: 5px;
   outline: none;
   cursor: pointer;
-  background: linear-gradient(90deg, var(--elixir-accent), #00d2ff calc(var(--p, 0%)), #151b2b var(--p, 0%)) !important;
+  background: linear-gradient(90deg, #0284c7, var(--elixir-accent) calc(var(--p, 0%)), #1e293b var(--p, 0%)) !important;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background: #fff;
+  background: #ffffff;
   border: 2px solid var(--elixir-accent);
-  box-shadow: 0 0 8px var(--elixir-accent-glow);
-  transition: transform 0.1s;
+  box-shadow: 0 0 10px var(--elixir-accent);
+  transition: transform 0.15s;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
+  transform: scale(1.25);
 }
 
-/* Console Styling */
+/* Console Box Styling */
 .elixir-console {
-  margin-top: 12px;
+  margin-top: 10px;
   padding: 10px 12px;
   border-radius: 10px;
-  background: rgba(2, 5, 15, 0.9);
-  border: 1px solid rgba(0, 102, 255, 0.3);
-  box-shadow: inset 0 0 12px rgba(0, 102, 255, 0.1);
+  background: rgba(2, 6, 23, 0.9);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  box-shadow: inset 0 0 15px rgba(2, 6, 23, 0.8);
 }
 
 .elixir-console-header {
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 800;
   letter-spacing: 1.5px;
-  color: #00d2ff;
+  color: var(--elixir-accent);
   margin-bottom: 6px;
-  border-bottom: 1px solid rgba(0, 102, 255, 0.2);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.15);
   padding-bottom: 4px;
   display: flex;
   justify-content: space-between;
 }
 
 .elixir-console-logs {
-  font-family: monospace;
-  font-size: 9.5px;
-  color: #93c5fd;
-  max-height: 80px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 9px;
+  color: #cbd5e1;
+  max-height: 75px;
   overflow-y: auto;
   line-height: 1.4;
   word-break: break-all;
@@ -262,8 +264,8 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 .elixir-subname {
   font-size: 8px;
-  letter-spacing: 1px;
-  color: #777;
+  letter-spacing: 0.8px;
+  color: var(--elixir-muted);
 }
 
 .elixir-switch {
@@ -271,15 +273,15 @@ input[type="range"]::-webkit-slider-thumb:hover {
   width: 48px;
   height: 26px;
   border-radius: 999px;
-  background: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #1e293b;
+  border: 1px solid var(--elixir-border);
   cursor: pointer;
   transition: background 0.25s, border-color 0.25s;
 }
 
 .elixir-switch.on {
-  background: linear-gradient(135deg, var(--elixir-accent), var(--elixir-accent-deep)) !important;
-  border-color: #00d2ff;
+  background: linear-gradient(135deg, #0284c7, #0369a1) !important;
+  border-color: var(--elixir-accent);
   box-shadow: 0 0 12px var(--elixir-accent-glow);
 }
 
@@ -292,7 +294,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   border-radius: 50%;
   background: #fff;
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .elixir-switch.on .elixir-knob {
@@ -300,11 +302,11 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .elixir-monitor {
-  margin-top: 12px;
+  margin-top: 10px;
   padding: 12px;
-  border: 1px solid var(--elixir-line);
-  border-radius: 12px;
-  background: rgba(10, 15, 30, 0.8);
+  border: 1px solid var(--elixir-border);
+  border-radius: 10px;
+  background: var(--elixir-card);
 }
 
 .elixir-reticle {
@@ -312,28 +314,28 @@ input[type="range"]::-webkit-slider-thumb:hover {
   width: 100%;
   aspect-ratio: 1 / 1;
   margin-top: 10px;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
-  background: radial-gradient(circle at 50% 50%, rgba(0, 102, 255, 0.1), rgba(0, 0, 0, 0.9) 70%), #000;
-  border: 1px solid rgba(0, 102, 255, 0.2);
+  background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.1), rgba(2, 6, 23, 0.95) 75%), #020617;
+  border: 1px solid var(--elixir-border);
 }
 
 .elixir-grid {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(0, 102, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 102, 255, 0.05) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
   background-size: 20% 20%;
 }
 
 .elixir-ring {
   position: absolute;
   border-radius: 50%;
-  border: 1px solid rgba(0, 102, 255, 0.2);
+  border: 1px solid rgba(56, 189, 248, 0.2);
 }
 .elixir-ring.r1 { inset: 32%; }
 .elixir-ring.r2 { inset: 18%; }
-.elixir-ring.r3 { inset: 6%; border-style: dashed; border-color: rgba(0, 102, 255, 0.1); }
+.elixir-ring.r3 { inset: 6%; border-style: dashed; border-color: rgba(56, 189, 248, 0.1); }
 
 .elixir-crosshair {
   position: absolute;
@@ -346,7 +348,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   top: 10%;
   bottom: 10%;
   width: 1px;
-  background: rgba(0, 102, 255, 0.15);
+  background: rgba(56, 189, 248, 0.12);
 }
 .elixir-crosshair::after {
   content: "";
@@ -355,28 +357,28 @@ input[type="range"]::-webkit-slider-thumb:hover {
   left: 10%;
   right: 10%;
   height: 1px;
-  background: rgba(0, 102, 255, 0.15);
+  background: rgba(56, 189, 248, 0.12);
 }
 
 .elixir-corner {
   position: absolute;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-color: var(--elixir-accent);
   border-style: solid;
   border-width: 2px;
-  opacity: 0.6;
+  opacity: 0.5;
 }
-.elixir-corner.tl { top: 6px; left: 6px; border-right: 0; border-bottom: 0; border-top-left-radius: 3px; }
-.elixir-corner.tr { top: 6px; right: 6px; border-left: 0; border-bottom: 0; border-top-right-radius: 3px; }
-.elixir-corner.bl { bottom: 6px; left: 6px; border-right: 0; border-top: 0; border-bottom-left-radius: 3px; }
-.elixir-corner.br { bottom: 6px; right: 6px; border-left: 0; border-top: 0; border-bottom-right-radius: 3px; }
+.elixir-corner.tl { top: 6px; left: 6px; border-right: 0; border-bottom: 0; }
+.elixir-corner.tr { top: 6px; right: 6px; border-left: 0; border-bottom: 0; }
+.elixir-corner.bl { bottom: 6px; left: 6px; border-right: 0; border-top: 0; }
+.elixir-corner.br { bottom: 6px; right: 6px; border-left: 0; border-top: 0; }
 
 .elixir-lbl {
   position: absolute;
-  font-size: 7.5px;
+  font-size: 7px;
   font-weight: 700;
-  color: #666;
+  color: var(--elixir-muted);
 }
 .elixir-lbl.lf { left: 8px; top: 50%; transform: translateY(-50%); }
 .elixir-lbl.rt { right: 8px; top: 50%; transform: translateY(-50%); }
@@ -387,10 +389,10 @@ input[type="range"]::-webkit-slider-thumb:hover {
   position: absolute;
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  width: 10px;
-  height: 10px;
-  background: #00d2ff;
-  box-shadow: 0 0 10px #00d2ff;
+  width: 9px;
+  height: 9px;
+  background: var(--elixir-accent);
+  box-shadow: 0 0 10px var(--elixir-accent);
   left: 50%;
   top: 50%;
 }
@@ -408,16 +410,16 @@ input[type="range"]::-webkit-slider-thumb:hover {
   gap: 8px;
   font-size: 9px;
   font-weight: 700;
-  color: #888;
+  color: var(--elixir-muted);
 }
 
 .elixir-meter i {
   flex: 1;
   height: 4px;
   border-radius: 4px;
-  background: #151515;
+  background: #020617;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--elixir-border);
 }
 
 .elixir-meter b {
@@ -425,7 +427,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   height: 100%;
   width: 0;
   border-radius: 4px;
-  background: linear-gradient(90deg, var(--elixir-accent-deep), var(--elixir-accent), #00d2ff);
+  background: linear-gradient(90deg, #0284c7, var(--elixir-accent));
   box-shadow: 0 0 8px var(--elixir-accent-glow);
 }
 
@@ -438,17 +440,17 @@ input[type="range"]::-webkit-slider-thumb:hover {
   padding: 10px 0;
   border-radius: 10px;
   cursor: pointer;
-  border: 1px solid rgba(0, 102, 255, 0.5);
+  border: 1px solid rgba(56, 189, 248, 0.4);
   color: #fff;
-  font: 800 11px/1 sans-serif;
+  font: 800 10.5px/1 sans-serif;
   letter-spacing: 2px;
-  background: linear-gradient(135deg, #0066ff, #002266) !important;
-  box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+  background: linear-gradient(135deg, #0284c7, #0f172a) !important;
+  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
   transition: filter 0.2s, transform 0.1s;
 }
 
 .elixir-reset:hover {
-  filter: brightness(1.15);
+  filter: brightness(1.2);
 }
 
 .elixir-reset:active {
