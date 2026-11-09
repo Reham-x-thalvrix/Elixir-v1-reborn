@@ -87,17 +87,21 @@ function renderBody() {
     n.appendChild(r.type === "toggle" ? v(r) : M(r));
   });
 
-  // কনসোল বক্স [121 SET] ট্যাবের নিচে যুক্ত করা হলো
+  // নতুন টার্মিনাল স্টাইল কনসোল বোর্ড [121 SET] ট্যাবের নিচে
   if (p === 0) {
     const consoleBox = document.createElement("div");
     consoleBox.className = "elixir-console";
     consoleBox.innerHTML = `
-      <div class="elixir-console-header">
-        <span>CONSOLE LOGS</span>
-        <span>STATUS: ACTIVE</span>
+      <div class="elixir-console-topbar">
+        <div class="elixir-console-dots">
+          <span class="elixir-console-dot red"></span>
+          <span class="elixir-console-dot yellow"></span>
+          <span class="elixir-console-dot green"></span>
+        </div>
+        <span class="elixir-console-title">ELIXIR V1 // TERMINAL</span>
       </div>
       <div id="elixir-log-content" class="elixir-console-logs">
-        <div>[System] Elixir V1 ready.</div>
+        <div>[System] Elixir V1 core online.</div>
       </div>
     `;
     n.appendChild(consoleBox);
@@ -148,7 +152,7 @@ function M(i) {
     O.textContent = i.fmt(h[i.key]);
     E();
     saveAndSync();
-    logMessage(`${i.name} set to ${h[i.key]}`);
+    logMessage(`${i.name} -> ${h[i.key]}`);
   });
   return r;
 }
@@ -168,7 +172,7 @@ function v(i) {
     y.classList.toggle("on", h[i.key]);
     y.setAttribute("aria-checked", h[i.key]);
     saveAndSync();
-    logMessage(`${i.name} toggled: ${h[i.key] ? 'ON' : 'OFF'}`);
+    logMessage(`${i.name} : ${h[i.key] ? 'ENABLED' : 'DISABLED'}`);
   };
   return r;
 }
